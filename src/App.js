@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter} from "react-router-dom";
+import Routing from "./Admin/routing";
+import Front_Routing from "./front-page/routing";
 function App() {
+  var url = window.location.pathname;
+  var splitUrl = url.split('/');   
+  const uid = splitUrl[1];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+ <BrowserRouter>
+ {
+   uid=='home'? 
+<Front_Routing/>
+:<Routing/>
+ }
+ </BrowserRouter>
   );
 }
-
 export default App;
