@@ -1,34 +1,28 @@
 
 import { useEffect, useState} from "react";
 import {db} from "../firebase";
-import {useHistory} from 'react-router-dom'
-function Edit() {    
-    var url = window.location.pathname;
-    var splitUrl = url.split('/');   
-    const uid = splitUrl[2];
+function Edit({id}) {       
     const [name, setName]=useState();
     const [dob, setDob]=useState();
     const [state, setState]=useState();
-    const [city, setCity]=useState();
-    const history =useHistory();
+    const [city, setCity]=useState();    
     useEffect(() => {   
-      db.collection('USERS').doc(uid).get()
+      db.collection('USERS').doc(id).get()
       .then(snapshot => {          
               setName(snapshot.data()['student_name']);
               setDob(snapshot.data()['dob']);
               setState(snapshot.data()['state']);
               setCity(snapshot.data()['city']);           
       })                
-    }, [])   
+    }, [id])   
     const Update=(e)=>{
         e.preventDefault();
-        db.collection('USERS').doc(uid).update({
+        db.collection('USERS').doc(id).update({
             student_name:name,
             dob:dob,
             state:state,
             city:city                    
-        })
-        history.push('/users')
+        })       
     }
 
     return (

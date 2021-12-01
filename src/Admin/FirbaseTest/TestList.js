@@ -1,11 +1,9 @@
 import {useState,useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import { Link,useParams} from 'react-router-dom';
 import {db} from "../../firebase";
 
 function TestList() {
-    var url = window.location.pathname;
-    var splitUrl = url.split('/');   
-    const uid = splitUrl[2];   
+  const {id} = useParams();  
 const [data, setData]=useState();
 const [state, setState] = useState({
   quiz:"",
@@ -16,7 +14,7 @@ getData();
 }, [])
 
 const getData=()=>{
-  db.collection('Test').doc(uid).collection('Test_list').get()
+  db.collection('Test').doc(id).collection('Test_id').get()
   .then( snapshot =>{
     const user = []
     snapshot.forEach( doc =>{
@@ -40,11 +38,12 @@ return{
 }
 const Create = (e)=>{
   e.preventDefault();
-  db.collection('Test').doc(uid).collection('Test_list').add({
+  db.collection('Test').doc(id).collection('Test_id')
+  .add({
   quiz:state.quiz,                   
   }).then(get=>{
     const test_uid = get.id;
-    db.collection('Test').doc(uid).collection('Test_list').doc(test_uid).update({
+    db.collection('Test').doc(id).collection('Test_id').doc(test_uid).update({
     test_id:test_uid,            
   })
   })
@@ -73,7 +72,7 @@ const Create = (e)=>{
          data&&data.map((user,index)=>{
              return(
                 <div className="card darken-1" key={index} >
-               <Link to={`/quiz-list/${user.test_id}`}>
+               <Link to={`/quiz-list/${id}/${user.test_id}`}>
                <div className="card-content black-text">
                   <span className="card-title">{user.quiz}</span>                  
                 </div>  

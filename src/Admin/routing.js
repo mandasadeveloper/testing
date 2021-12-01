@@ -7,7 +7,7 @@ import Authentication from "./authentication"
 import Users from "./users"
 import Edit from "./Edit"
 import {auth} from '../firebase'
-import Images from './Banners/Images';
+import Banners from './Banners/banners';
 import CreateTest from './FirbaseTest/CreateTest';
 import TestList from './FirbaseTest/TestList';
 import QuizList from './FirbaseTest/QuizList';
@@ -40,12 +40,12 @@ function Routing(url) {
              <div id="layoutSidenav_content">         
              <Route  path="/authentication" component={Authentication}/>
              <Route  path="/users"><Users/></Route>
-             <Route  path="/edit"><Edit/></Route>
-             <Route  path="/images"><Images/></Route>
+             <Route  path="/edit"><Edit/></Route> 
+             <Route  path="/banners"><Banners/></Route>
              <Route  path="/test-series"><CreateTest/></Route>
-             <Route  path="/test-list"><TestList/></Route>
-             <Route  path="/quiz-list"><QuizList/></Route>
-              </div>  
+             <Route  path="/test-list/:id" children={<TestList/>}/>
+             <Route  path="/quiz-list/:url_id/:uid" children={<QuizList/>}/>
+            </div>  
          </div>
          </div>
         </>      }

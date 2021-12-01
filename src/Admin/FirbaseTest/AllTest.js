@@ -12,7 +12,7 @@ return (
                     <li className="collection-item">{user.option_1}</li>
                     <li className="collection-item">{user.option_2}</li>    
                     <li className="collection-item">{user.option_3}</li>
-                    <li className="collection-item">{user.option_4}</li>
+                    <li className="collection-item">{user.option_4}</li> 
                     </ul>  
             )
             

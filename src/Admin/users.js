@@ -1,6 +1,9 @@
 import { useEffect, useState} from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import 'reactjs-popup/dist/index.css';
 import {db} from "../firebase";
+import Popup from 'reactjs-popup';
+import Edit from "./Edit";
 const User = ()=>{
     const [data, setData]=useState();    
     useEffect(() => {      
@@ -48,14 +51,17 @@ const User = ()=>{
                 </thead>
                 <tbody> 
                       {
-                          data&&data.map((user, index)=>{                           
+                          data&&data.map((user, index)=>{ 
+                              const sr_no = index+1;                          
                                 return(
-                                    <tr key={index}>
-                                        <td>{index}</td>
+                                    <tr key={sr_no}>
+                                        <td>{sr_no}</td>
                                         <td>{user.student_name}</td>
                                         <td>{user.phone_number}</td>
                                         <td>{user.city}</td>
-                                        <td><Link to={`/edit/${user.uid}`}>Edit</Link></td>
+                                        <td><Popup trigger={<button> Edit</button>} position="bottom">
+                                           <Edit id={user.uid}/>
+                                            </Popup></td>
                                         <td><button onClick={()=>deleteData(user.uid)}>Delete</button></td>
                                     </tr>
                                 )                        

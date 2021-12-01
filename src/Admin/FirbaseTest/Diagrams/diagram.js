@@ -1,15 +1,14 @@
-import React, { useState,useEffect } from 'react'
+import { useState,useEffect } from 'react'
 import {db, storage} from '../../../firebase'
-
+import {useParams} from 'react-router-dom';
 function Diagram({id}) {
+  const {url_id, uid} = useParams();  
   const [url, setUrl] = useState()
-
   useEffect(() => {
-    getUrl()   
+    getUrl();   
   }, [])
-
   const getUrl = ()=>{
-    db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc('eiRMEg0LQomdEDNASjtu').collection('quiz_list').doc(id)
+    db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('quiz_list').doc(id)    
     .get()
     .then( snapshot =>{     
       setUrl(snapshot.data().url);
@@ -31,7 +30,8 @@ function Diagram({id}) {
         .child(file.name)
         .getDownloadURL()
         .then(url=>{          
-          db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc('eiRMEg0LQomdEDNASjtu').collection('quiz_list').doc(id)
+          db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('quiz_list')
+          .doc(id)
           .update({
             url:url
           });
@@ -41,7 +41,8 @@ function Diagram({id}) {
     )    
   }
   const del=()=>{
-    db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc('eiRMEg0LQomdEDNASjtu').collection('quiz_list').doc(id)
+    db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('quiz_list')
+    .doc(id)
     .update({
       url:""
     });

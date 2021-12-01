@@ -2,11 +2,11 @@ import {useState,useEffect} from 'react'
 import {ExcelRenderer} from 'react-excel-renderer';
 import AllTest from './AllTest';
 import {db} from "../../firebase";
+import {useParams} from 'react-router-dom';
 
 function QuizList() {
-    var url = window.location.pathname;
-    var splitUrl = url.split('/');   
-    const uid = splitUrl[2];
+  const {url_id, uid} = useParams();  
+
 const [data, setData]=useState();
 const [state, setState] = useState({ 
   rows:"",
@@ -17,12 +17,10 @@ const [state, setState] = useState({
   option_4:"",
   answer:""
   });
-useEffect(() => {   
-getData();
-}, [])
+
 
 const getData=()=>{
-  db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc(uid).collection('quiz_list').get()
+  db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('quiz_list').get()
   .then( snapshot =>{
     const user = []
     snapshot.forEach( doc =>{
@@ -53,8 +51,8 @@ const handleInputs=(e)=>{
 
 const Create = (e)=>{
   for(var i = 0; i<state.rows.length; i++)
-if(i%7==0){
-db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc(uid).collection('quiz_list').add({
+if(i%7===0){
+db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('quiz_list').add({
   quiztest:state.rows[i],
   option_1:state.rows[i+1],
   option_2:state.rows[i+2],
@@ -63,13 +61,16 @@ db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc(ui
   answer:state.rows[i+5],                 
   }).then(get=>{
     const test_uid = get.id;
-    db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc(uid).collection('quiz_list').doc(test_uid).update({
+db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('quiz_list').doc(test_uid).update({
     test_id:test_uid,            
   })
   })
   getData();
 }
 }
+useEffect(() => {   
+  getData();
+  }, [])
     return (
     <div>
             <div style={{width:"90%", margin:"auto"}} >

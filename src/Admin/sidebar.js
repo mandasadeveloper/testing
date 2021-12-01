@@ -15,7 +15,7 @@ const Sidebar=()=>{
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         Users
                     </Link>       
-                    <Link className="nav-link" to="/images">
+                    <Link className="nav-link" to="/banners">
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         Banners
                     </Link>

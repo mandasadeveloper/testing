@@ -9,8 +9,8 @@ function Front_Routing() {
     return (
         <Switch>         
         <Route exact  path="/home"><CreateTest/></Route>
-        <Route  path="/test-list"><TestList/></Route>
-        <Route  path="/quiz-list"><QuizList/></Route>
+        <Route  path="/test-list/:id" children={<TestList/>}/>
+        <Route  path="/quiz-list/:url_id/:uid" children={<QuizList/>}/>
         <Route  path="/report"><Report/></Route>
       </Switch>
     )

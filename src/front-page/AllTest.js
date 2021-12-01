@@ -3,11 +3,9 @@ import {db} from '../firebase'
 import ReactPaginate from 'react-paginate';
 import Report from './Report';
 import AnswerSheet from './AnswerSheet';
-
+import {useParams} from 'react-router-dom';
 function AllTest() { 
-  var url = window.location.pathname;
-  var splitUrl = url.split('/'); 
-  const uid = splitUrl[2];
+  const {url_id, uid} = useParams();  
     const [offset, setOffset] = useState(0);
     const [value, setValue] = useState([]);
     const [perPage] = useState(1);
@@ -34,7 +32,7 @@ else{
 }
     }
     const getData = async() => {       
-      db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc(uid).collection('quiz_list').get()
+      db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('quiz_list').get()
       .then( snapshot =>{
         const user = []
         snapshot.forEach( doc =>{
@@ -51,10 +49,10 @@ else{
             <li className="collection-item" ><img src = {user.url} style={{maxWidth:"200px"}}/></li>
             :null
           }                  
-          <a className="collection-item waves-effect state" onClick={()=>Click(user.option_1,user.answer,user.test_id)}>{user.option_1}</a>
-          <a className="collection-item waves-effect state" onClick={()=>Click(user.option_2,user.answer,user.test_id)}>{user.option_2}</a>    
-          <a className="collection-item waves-effect state" onClick={()=>Click(user.option_3,user.answer,user.test_id)}>{user.option_3}</a>
-          <a className="collection-item waves-effect state" onClick={()=>Click(user.option_4,user.answer,user.test_id)}>{user.option_4}</a>                                                                            
+          <a className="collection-item waves-effect state" onClick={()=>Click(user.option_1[0],user.answer[0],user.test_id)}>{user.option_1}</a>
+          <a className="collection-item waves-effect state" onClick={()=>Click(user.option_2[0],user.answer[0],user.test_id)}>{user.option_2}</a>    
+          <a className="collection-item waves-effect state" onClick={()=>Click(user.option_3[0],user.answer[0],user.test_id)}>{user.option_3}</a>
+          <a className="collection-item waves-effect state" onClick={()=>Click(user.option_4[0],user.answer[0],user.test_id)}>{user.option_4}</a>                                                                            
         </div>)
         setValue(postData)
         setPageCount(Math.ceil(user.length / perPage))
@@ -70,18 +68,18 @@ else{
         setOffset(selectedPage)
     };
     const Submit=(e)=>{        
-      e.preventDefault();          
-      db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc(uid).collection('user_answers')
-      .add({         
-        user_name:"user",
-        report:report,                 
+      e.preventDefault();    
+      const attempt = score+wrong;
+      setShowScore({score:score,pageCount:pageCount, wrong:wrong, attempt:attempt, unattempt:pageCount-attempt});           
+      db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('user_answers')
+      .add({                 
+        report:report,   
+        score:[{score:score,pageCount:pageCount, wrong:wrong, attempt:attempt, unattempt:pageCount-attempt}],              
       }).then(get=>{        
-        db.collection('Test').doc('Sw7DqGT7Nt5WnTJM7AcB').collection('Test_list').doc(uid).collection('user_answers').doc(get.id)
+        db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('user_answers').doc(get.id)
         .get().then(snapshot=>setAnswer(snapshot.data().report))
       })     
-      getData();
-      const attempt = score+wrong;
-      setShowScore({score:score,pageCount:pageCount, wrong:wrong, attempt:attempt, unattempt:pageCount-attempt});     
+      getData();      
     }   
     return (
         <div className="App">
@@ -96,7 +94,7 @@ else{
                         breakClassName={"break-me"}
                         pageCount={pageCount}
                         marginPagesDisplayed={1}
-                        pageRangeDisplayed={150}
+                        pageRangeDisplayed={5}
                         onPageChange={handlePageClick}
                         containerClassName={"pagination"}
                         subContainerClassName={"pages pagination"}

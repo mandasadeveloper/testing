@@ -1,18 +1,16 @@
 import {useState,useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import { Link,useParams} from 'react-router-dom';
 import {db} from "../firebase";
 
-function TestList() {
-    var url = window.location.pathname;
-    var splitUrl = url.split('/');   
-    const uid = splitUrl[2];   
+function TestList() {  
+  const {id} = useParams();
 const [data, setData]=useState();
 useEffect(() => {   
 getData();
 }, [])
 
 const getData=()=>{
-  db.collection('Test').doc(uid).collection('Test_list').get()
+  db.collection('Test').doc(id).collection('Test_id').get()
   .then( snapshot =>{
     const user = []
     snapshot.forEach( doc =>{
@@ -33,7 +31,7 @@ const getData=()=>{
          data&&data.map((user,index)=>{
              return(
                 <div className="card darken-1" key={index} >
-               <Link to={`/quiz-list/${user.test_id}`}>
+               <Link to={`/quiz-list/${id}/${user.test_id}`}>
                <div className="card-content black-text">
                   <span className="card-title">{user.quiz}</span>                  
                 </div>  
