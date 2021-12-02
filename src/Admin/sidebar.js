@@ -22,7 +22,11 @@ const Sidebar=()=>{
                     <Link className="nav-link" to="/test-series">
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         Create Test
-                    </Link>            
+                    </Link>  
+                    <Link className="nav-link" to="/admin-classes">
+                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                        Classes
+                    </Link>           
                 </div>
             </div>
             <div className="sb-sidenav-footer">
