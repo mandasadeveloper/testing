@@ -47,26 +47,14 @@ const Create = (e)=>{
     test_id:test_uid,            
   })
   })
+  setState({
+    quiz:"",
+  })
   getData();
 }
     return (
     <div>
-            <div style={{width:"90%", margin:"auto"}} >
-        <div className="col s12">
-          <div style={{marginTop:"10%", display:"block"}}>             
-            <div className="input-field col s12" style={{maxWidth:"500px", margin:"5% 15%"}}>
-              <input type="text" 
-              id="autocomplete-description" 
-              className="autocomplete"
-              name="quiz"
-              value={state.quiz}
-              onChange={handleInputs}/>
-              <label htmlFor="autocomplete-description">Create new Quiz</label>
-              <a onClick={Create} className="waves-effect btn">Create</a>
-            </div>        
-          </div>
-        </div>
-        <div className="row">
+            <div style={{padding:"10% 10%"}}>        
     <div className="col s12 m6">
      {
          data&&data.map((user,index)=>{
@@ -80,11 +68,20 @@ const Create = (e)=>{
               </div>
              )
          })
-     }
-    </div>
-  </div>
-      </div>
-    </div>
+     }  
+  </div>                
+            <div className="input-field col s12 card darken-1" style={{margin:"10%"}}>
+              <input type="text" 
+              id="autocomplete-description" 
+              className="autocomplete"
+              name="quiz"
+              value={state.quiz}
+              onChange={handleInputs}/>
+              <label htmlFor="autocomplete-description">Create new Quiz</label>
+              <a onClick={Create} className="waves-effect btn">Create</a>
+            </div>        
+          </div>
+        </div>            
     )
 }
 

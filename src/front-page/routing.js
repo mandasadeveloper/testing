@@ -8,7 +8,7 @@ import Report from "./Report";
 function Front_Routing() {   
     return (
         <Switch>         
-        <Route exact  path="/home"><CreateTest/></Route>
+        <Route exact  path="/"><CreateTest/></Route>
         <Route  path="/test-list/:id" children={<TestList/>}/>
         <Route  path="/quiz-list/:url_id/:uid" children={<QuizList/>}/>
         <Route  path="/report"><Report/></Route>

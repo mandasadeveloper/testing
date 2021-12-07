@@ -1,18 +1,10 @@
-import { BrowserRouter} from "react-router-dom";
-import Routing from "./Admin/routing";
+import { BrowserRouter} from "react-router-dom"
 import Front_Routing from "./front-page/routing";
-function App() {
-  var url = window.location.pathname;
-  var splitUrl = url.split('/');   
-  const uid = splitUrl[1];
+function App() {  
   return (
- <BrowserRouter>
- {
-   uid=='home'? 
+ <BrowserRouter basename={'/pscadda_2021'}> 
 <Front_Routing/>
-:<Routing/>
- }
- </BrowserRouter>
+ </BrowserRouter> 
   );
 }
 export default App;

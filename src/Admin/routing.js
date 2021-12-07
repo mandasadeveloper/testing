@@ -16,6 +16,7 @@ import EditCourses from './classes/EditCourses';
 import Subjects from './classes/Subjects';
 import VideosClass from './classes/Videos';
 import Video from './classes/Video';
+import CreatePost from './Post/CreatePost';
 
 
 function Routing(url) {
@@ -55,6 +56,7 @@ function Routing(url) {
              <Route  path="/admin-sujects/:id"><Subjects/></Route>
              <Route  path="/admin-videos-link/:id/:videos_id"><VideosClass/></Route>
              <Route  path="/admin-video/:id/:videos_id/:index"><Video/></Route>
+             <Route  path="/admin-post"><CreatePost/></Route>
             </div>  
          </div>
          </div>

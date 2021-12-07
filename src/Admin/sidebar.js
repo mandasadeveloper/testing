@@ -26,7 +26,11 @@ const Sidebar=()=>{
                     <Link className="nav-link" to="/admin-classes">
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         Classes
-                    </Link>           
+                    </Link>   
+                    <Link className="nav-link" to="/admin-post">
+                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                        Add Post
+                    </Link>            
                 </div>
             </div>
             <div className="sb-sidenav-footer">

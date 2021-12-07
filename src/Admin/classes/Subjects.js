@@ -51,23 +51,8 @@ const Create = (e)=>{
 }
     return (
     <div>
-            <div style={{width:"90%", margin:"auto"}} >
-        <div className="col s12">
-          <div style={{marginTop:"10%", display:"block"}}>             
-            <div className="input-field col s12" style={{maxWidth:"500px", margin:"5% 15%"}}>
-              <input type="text" 
-              id="autocomplete-description" 
-              className="autocomplete"
-              name="name"
-              value={state.name}
-              onChange={handleInputs}/>
-              <label htmlFor="autocomplete-description">Insert New Subjects</label>
-              <a onClick={Create} className="waves-effect btn">Create</a>
-            </div>        
-          </div>
-        </div>
-        <div className="row">
-    <div className="col s12 m6">
+            <div style={{width:"90%", margin:"auto"}} >         
+    <div className="col s12 m6" style={{margin:"10%"}}>
       <h4>Subjects</h4>
      {
          data&&data.map((user,index)=>{
@@ -83,7 +68,20 @@ const Create = (e)=>{
          })
      }
     </div>
-  </div>
+        <div className="col s12">
+          <div style={{marginTop:"10%", display:"block"}}>             
+            <div className="input-field col s12" style={{maxWidth:"500px", margin:"5% 15%"}}>
+              <input type="text" 
+              id="autocomplete-description" 
+              className="autocomplete"
+              name="name"
+              value={state.name}
+              onChange={handleInputs}/>
+              <label htmlFor="autocomplete-description">Insert New Subjects</label>
+              <a onClick={Create} className="waves-effect btn">Create</a>
+            </div>        
+          </div>
+        </div>       
       </div>
     </div>
     )

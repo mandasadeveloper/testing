@@ -50,6 +50,24 @@ const Create = (e)=>{
 }
     return (
     <div>
+      <div style={{padding:"10%", margin:"auto"}} >  
+     {
+         data&&data.map((user,index)=>{
+             return(
+                <div className="card darken-1" key={index} >
+                <div className="card-content black-text">
+                  <span className="card-title">{user.title}</span>
+                  <p>{user.description}</p>
+                </div>
+                <div className="card-action">
+                  <Link to={`/admin-sujects/${user.uid}`}>See More</Link> 
+                  <Link to={`edit-courses/${user.uid}`} >Edit</Link>                 
+                </div>
+              </div>
+             )
+         })
+     }    
+  </div>
             <div style={{width:"90%", margin:"auto"}} >
         <div className="col s12">
        <form onSubmit={Create}>
@@ -75,27 +93,7 @@ const Create = (e)=>{
             </div>        
           </div>
        </form>
-        </div>
-        <div className="row">
-    <div className="col s12 m6">
-     {
-         data&&data.map((user,index)=>{
-             return(
-                <div className="card darken-1" key={index} >
-                <div className="card-content black-text">
-                  <span className="card-title">{user.title}</span>
-                  <p>{user.description}</p>
-                </div>
-                <div className="card-action">
-                  <Link to={`/admin-sujects/${user.uid}`}>See More</Link> 
-                  <Link to={`edit-courses/${user.uid}`} >Edit</Link>                 
-                </div>
-              </div>
-             )
-         })
-     }
-    </div>
-  </div>
+        </div>        
       </div>
     </div>
     )

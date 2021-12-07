@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react'
-import { Link,useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {db,storage} from "../../firebase";
 function VideosClass() {  
   const {id,videos_id} = useParams();
@@ -61,7 +61,12 @@ const getData=()=>{
     setData(user)
   })    
 }
-
+const videDelete = (e,uid)=>{
+  e.preventDefault();
+  db.collection('Course').doc(id).collection('subjects').doc(videos_id).collection('videos').doc(uid)
+  .delete()
+getData()       
+}
     return (
     <div>       
             <div style={{maxWidth:"700px",margin:'auto'}}>                
@@ -70,14 +75,16 @@ const getData=()=>{
     <div className="col s12 m6">
      {
          data&&data.map((user,index)=>{
-             return(
-                <div className="card darken-1" key={index} >               
-              <Link to ={`/admin-video/${id}/${videos_id}/${user.uid}`}>
-              <div className="card-content black-text">
-                  <p className="card-title">{user.title}</p>                          
-                </div></Link>                   
-              </div>
-             )
+            return(
+              user.title?
+            <div className="card darken-1" key={index} >                            
+            <div style={{display:"flex", justifyContent:"space-between"}} className="card-content black-text">
+                <p className="card-title">{user.title}</p>            
+                <button onClick={(e)=>videDelete(e,user.uid)}>Delete</button>              
+              </div>                
+            </div>
+            :null       
+            )     
          })
      }
     </div>

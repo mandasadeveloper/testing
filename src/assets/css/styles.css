@@ -222,6 +222,9 @@ small, .small {
   font-size: 0.875em;
 }
 
+
+
+
 mark, .mark {
   padding: 0.2em;
   background-color: #fcf8e3;
@@ -4138,6 +4141,20 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
+}
+
+.icons{
+  color:white;
+  cursor:pointer;
+}
+
+
+.texts{
+  color:white;
+  cursor:pointer;
+}
+.icons:hover{
+  color:blue;
 }
 
 .navbar-nav-scroll {

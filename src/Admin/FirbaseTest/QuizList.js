@@ -62,7 +62,8 @@ db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('qui
   }).then(get=>{
     const test_uid = get.id;
 db.collection('Test').doc(url_id).collection('Test_id').doc(uid).collection('quiz_list').doc(test_uid).update({
-    test_id:test_uid,            
+    test_id:test_uid,   
+    url:""         
   })
   })
   getData();
@@ -88,7 +89,7 @@ useEffect(() => {
         </div>
         <div className="row">
     <div className="col s12 m6">
-     <AllTest data={data}/>
+     <AllTest data={data} url_id={url_id} uid={uid}/>
     </div>
   </div>
       </div>
